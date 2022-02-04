@@ -64,7 +64,7 @@ public class Spring {
         // Elastic Force
         Vector3 Force = - Stiffness * (Length - Length0) * u;
         // Damping Force
-        Force += - Damping * Vector3.Dot(u, nodeA.Vel - nodeB.Vel) * u;
+        Force += - Damping * Stiffness * Vector3.Dot(u, nodeA.Vel - nodeB.Vel) * u;
         
         // Node A
         force[nodeA.index] += Force.x;
@@ -82,11 +82,11 @@ public class Spring {
     {
         // Direction of the Forces
         VectorXD u = new DenseVectorXD(3);
-        Vector3 dir = nodeA.Pos - nodeB.Pos;
-        dir.Normalize();
-        u[0] = dir[0];
-        u[1] = dir[1];
-        u[2] = dir[2];
+        Vector3 d = nodeA.Pos - nodeB.Pos;
+        d.Normalize();
+        u[0] = d[0];
+        u[1] = d[1];
+        u[2] = d[2];
         MatrixXD uuT = u.OuterProduct(u);
         
         // Identity matrix
@@ -99,7 +99,7 @@ public class Spring {
         MatrixXD dFbdxb = dFadxa;
         
         // dFadva and cross derivatives computation dFadva => -d * u.transposed * u
-        MatrixXD dFadva = - Damping * uuT;
+        MatrixXD dFadva = - Damping * Stiffness * uuT;
         MatrixXD dFadvb = - dFadva;
         MatrixXD dFbdva = - dFadva;
         MatrixXD dFbdvb = dFadva;

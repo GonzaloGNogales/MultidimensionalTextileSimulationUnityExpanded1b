@@ -111,9 +111,7 @@ public class PhysicsManager : MonoBehaviour
         VectorXD x = new DenseVectorXD(m_numDoFs);
         VectorXD v = new DenseVectorXD(m_numDoFs);
         VectorXD f = new DenseVectorXD(m_numDoFs);
-        f.Clear();
         MatrixXD Minv = new DenseMatrixXD(m_numDoFs);
-        Minv.Clear();
 
         foreach (ISimulable obj in m_objs)
         {
@@ -147,9 +145,7 @@ public class PhysicsManager : MonoBehaviour
 		VectorXD x = new DenseVectorXD(m_numDoFs);
 		VectorXD v = new DenseVectorXD(m_numDoFs);
 		VectorXD f = new DenseVectorXD(m_numDoFs);
-		f.Clear();
 		MatrixXD Minv = new DenseMatrixXD(m_numDoFs);
-		Minv.Clear();
 
 		foreach (ISimulable obj in m_objs)
 		{

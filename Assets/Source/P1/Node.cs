@@ -46,11 +46,9 @@ public class Node {
         // Add gravity and damping forces related with actual node vel
         
         // Gravity Force
-        //Debug.Log(Mass);
-        //Debug.Log(Manager.Gravity);
         Vector3 Force = Mass * Manager.Gravity;
         // Damping Force
-        Force += - Damping * Vel;
+        Force += - Damping * Mass * Vel;
         
         force[index] += Force.x;
         force[index + 1] += Force.y;
@@ -64,7 +62,7 @@ public class Node {
         // But we have to manage dFdv for simulating damping force
         // Fill dFdv (D) and set it
         MatrixXD I = DenseMatrixXD.CreateIdentity(3);
-        MatrixXD damping = - Damping * I;
+        MatrixXD damping = - Damping * Mass * I;
         dFdv.SetSubMatrix(index, 
                         index, 
                           dFdv.SubMatrix(index, 3, index, 3) + damping);

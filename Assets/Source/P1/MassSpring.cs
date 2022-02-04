@@ -173,7 +173,6 @@ public class MassSpring : MonoBehaviour, ISimulable
 
     public void FixedUpdate()
     {
-        // TO BE COMPLETED
     }
     #endregion
 
@@ -183,11 +182,6 @@ public class MassSpring : MonoBehaviour, ISimulable
     {
         Manager = m;			 // Physics Manager object reference
         index = ind;			 // Starting node index => 0
-        Mass = 1;                // Each node mass value
-        StiffnessStretch = 100;  // Stretching stiffness (Traction Springs)
-        StiffnessBend = 10;      // Bending stiffness << Stretching stiffness
-        DampingAlpha = 0.4f;     // Nodes: alpha * mass
-        DampingBeta = 0.01f;     // Springs: beta * stiffness
 
         // Initialize the nodes with required values
         foreach (Node node in Nodes)
